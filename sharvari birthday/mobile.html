@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sharvariii Birthday ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:system-ui;
+background:#0b0b14;
+color:white;
+overflow-x:hidden;
+}
+
+/* APP */
+
+.page{
+display:none;
+min-height:100vh;
+flex-direction:column;
+align-items:center;
+padding:15px;
+}
+
+.active{
+display:flex;
+}
+
+/* HEADER (Instagram style) */
+
+.header{
+width:100%;
+max-width:420px;
+display:flex;
+align-items:center;
+gap:10px;
+padding:12px;
+background:rgba(255,255,255,0.06);
+border-radius:15px;
+backdrop-filter:blur(10px);
+margin-bottom:15px;
+}
+
+.story{
+width:45px;
+height:45px;
+border-radius:50%;
+border:2px solid #ff4d88;
+padding:2px;
+overflow:hidden;
+}
+
+.story img{
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:50%;
+}
+
+/* LOGIN CARD */
+
+.card{
+width:100%;
+max-width:380px;
+background:rgba(255,255,255,0.06);
+padding:25px;
+border-radius:20px;
+text-align:center;
+backdrop-filter:blur(10px);
+}
+
+input{
+width:100%;
+padding:14px;
+margin:12px 0;
+border:none;
+border-radius:12px;
+outline:none;
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#ff4d88;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+#error{
+color:red;
+margin-top:10px;
+}
+
+/* SLIDESHOW */
+
+.slideshow{
+width:100%;
+max-width:420px;
+height:520px;
+border-radius:20px;
+overflow:hidden;
+position:relative;
+background:black;
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+.slide{
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+transition:opacity 1s ease;
+}
+
+.active-slide{
+opacity:1;
+}
+
+/* MESSAGE */
+
+.message{
+width:100%;
+max-width:420px;
+background:rgba(255,255,255,0.06);
+padding:20px;
+border-radius:20px;
+line-height:1.7;
+white-space:pre-line;
+margin-top:10px;
+}
+
+/* HEARTS */
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:20px;
+animation:floatUp linear forwards;
+pointer-events:none;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-110vh) rotate(360deg);opacity:0;}
+}
+
+@media(max-width:480px){
+.slideshow{height:450px;}
+}
+
+audio{
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+<source src="birthday-song.mp3" type="audio/mpeg">
+</audio>
+<!-- PAGE 1 -->
+
+<div id="page1" class="page active">
+
+<div class="card">
+
+<h2>🎂 Birthday Surprise 🎂</h2>
+<p>For Sharvariii ❤️</p>
+
+<input type="password" id="password" placeholder="Enter Password">
+
+<button onclick="checkPassword()">Open Surprise ✨</button>
+
+<p id="error"></p>
+
+</div>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div id="page2" class="page">
+
+<div class="header">
+
+<div class="story">
+<img src="https://i.postimg.cc/G4Ykgtk9/photo3.jpg">
+</div>
+
+<span>Sharvariii ❤️</span>
+
+</div>
+
+<div class="slideshow">
+
+<img src="https://i.postimg.cc/9DTGg0GM/photo1-(8).jpg" class="slide active-slide">
+<img src="https://i.postimg.cc/sMSpHxpD/photo1-(9).jpg" class="slide">
+<img src="https://i.postimg.cc/FYcjCzjK/photo1-jpg.jpg" class="slide">
+<img src="https://i.postimg.cc/DSsqp0q0/photo2-jpg.jpg" class="slide">
+<img src="https://i.postimg.cc/G4Ykgtk9/photo3.jpg" class="slide">
+<img src="https://i.postimg.cc/Sn8W1RWJ/photo4.jpg" class="slide">
+<img src="https://i.postimg.cc/186p7Xp8/photo5-jpg.jpg" class="slide">
+<img src="https://i.postimg.cc/K1LnpjnK/photo6.jpg" class="slide">
+
+</div>
+
+<br>
+
+<button onclick="openWish()">Next ❤️</button>
+
+</div>
+<!-- PAGE 3 -->
+
+<div id="page3" class="page">
+
+<h2>🎉 Happy Birthday Sharvariii 🎉</h2>
+
+<div id="typingText" class="message"></div>
+
+<h3>❤️ From Devesh Patil ❤️</h3>
+
+</div>
+
+<script>
+
+const PASSWORD = "162011";
+
+/* LOGIN */
+
+function checkPassword(){
+
+let pass = document.getElementById("password").value;
+
+if(pass === PASSWORD){
+
+document.getElementById("page1").classList.remove("active");
+document.getElementById("page2").classList.add("active");
+
+/* MUSIC START */
+let music = document.getElementById("music");
+music.currentTime = 0;
+music.play().catch(()=>{});
+
+}else{
+document.getElementById("error").innerText = "❌ Wrong Password";
+}
+
+}
+
+/* SLIDESHOW */
+
+let index = 0;
+
+let slides = document.querySelectorAll(".slide");
+
+setInterval(()=>{
+
+slides[index].classList.remove("active-slide");
+
+index++;
+
+if(index >= slides.length) index = 0;
+
+slides[index].classList.add("active-slide");
+
+},3000);
+
+/* OPEN FINAL PAGE */
+
+function openWish(){
+
+document.getElementById("page2").classList.remove("active");
+document.getElementById("page3").classList.add("active");
+
+startTyping();
+}
+
+/* MESSAGE */
+
+const msg = `
+Happy Birthday Sharvariii ❤️
+
+You are one of the most special people in my life.
+
+We shared so many memories, laughs and fun moments 😂
+
+And yes... block unblock era still legendary 😄
+
+I hope your life becomes full of happiness, success and peace.
+
+Keep smiling always ❤️
+
+— Devesh Patil
+`;
+
+let i = 0;
+let started = false;
+
+function startTyping(){
+
+if(started) return;
+started = true;
+
+function type(){
+
+if(i < msg.length){
+document.getElementById("typingText").innerHTML += msg.charAt(i);
+i++;
+setTimeout(type,30);
+}
+
+}
+
+type();
+}
+
+/* HEARTS FIXED */
+
+function createHeart(){
+
+let heart = document.createElement("div");
+heart.innerHTML = "💖";
+heart.classList.add("heart");
+
+heart.style.left = Math.random()*100 + "vw";
+heart.style.animationDuration = (Math.random()*5+4)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>heart.remove(),9000);
+
+}
+
+setInterval(createHeart,400);
+
+</script>
+
+</body>
+</html>
